@@ -1,49 +1,35 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" fixed app>
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar fixed app>
-      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-
+    <v-app-bar color="primary" dark flat fixed app>
       <v-toolbar-title class="font-weight-bold" v-text="title" />
       <v-spacer />
     </v-app-bar>
     <v-content>
       <v-container>
+        <v-row justify="end">
+          <v-col>Col1</v-col>
+          <v-col>Col2</v-col>
+        </v-row>
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
-    </v-footer>
+
+    <v-bottom-navigation v-model="bottomNav" color="primary">
+      <v-btn value="dashboard">
+        <span>Dashboard</span>
+        <v-icon>mdi-view-dashboard</v-icon>
+      </v-btn>
+
+      <v-btn value="settings">
+        <span>Settings</span>
+        <v-icon>mdi-settings</v-icon>
+      </v-btn>
+
+      <v-btn value="nearby">
+        <span>Nearby</span>
+        <v-icon>mdi-map-marker</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 
@@ -54,22 +40,11 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
+      bottomNav: 'dashboard',
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'SmokeCounter'
+      title: 'SmokeCount'
     }
   }
 }
