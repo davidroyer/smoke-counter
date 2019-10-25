@@ -11,7 +11,7 @@
       </v-container>
     </v-content>
 
-    <v-bottom-navigation v-model="bottomNav">
+    <v-bottom-navigation v-model="bottomNav" color="primary">
       <v-btn value="dashboard">
         <span>Dashboard</span>
         <v-icon>mdi-view-dashboard</v-icon>
