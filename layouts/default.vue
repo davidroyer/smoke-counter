@@ -4,17 +4,14 @@
       <v-toolbar-title class="font-weight-bold" v-text="title" />
       <v-spacer />
     </v-app-bar>
+
     <v-content>
       <v-container>
-        <v-row justify="end">
-          <v-col>Col1</v-col>
-          <v-col>Col2</v-col>
-        </v-row>
         <nuxt />
       </v-container>
     </v-content>
 
-    <v-bottom-navigation v-model="bottomNav" color="primary">
+    <v-bottom-navigation v-model="bottomNav">
       <v-btn value="dashboard">
         <span>Dashboard</span>
         <v-icon>mdi-view-dashboard</v-icon>
@@ -37,15 +34,19 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
       bottomNav: 'dashboard',
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
       title: 'SmokeCount'
     }
   }
 }
 </script>
+
+<style lang="scss">
+.v {
+  &-bottom-navigation {
+    .v-btn {
+      height: initial !important;
+    }
+  }
+}
+</style>
