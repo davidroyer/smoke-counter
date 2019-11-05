@@ -1,7 +1,5 @@
 <template>
   <v-row justify="center">
-    <!-- <v-layout column justify-center align-center></v-layout>
-    <v-flex xs12 sm8 md6></v-flex> -->
     <v-col>
       <div class="text-center">
         <h2 class="display-2 font-weight-medium">Add To Count</h2>
@@ -9,6 +7,8 @@
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
         <pre>{{ datesDB }}</pre>
+        <hr />
+        <h3>nativeUI</h3>
       </div>
     </v-col>
   </v-row>
