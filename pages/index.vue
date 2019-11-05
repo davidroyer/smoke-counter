@@ -2,6 +2,7 @@
   <v-row justify="center">
     <v-col>
       <div class="text-center">
+        <h2 class="display-2 font-weight-medium">UPDATE</h2>
         <h2 class="display-2 font-weight-medium">Add To Count</h2>
         <v-btn class="mx-2" fab dark color="indigo" @click="addToSmokeCount">
           <v-icon dark>mdi-plus</v-icon>
