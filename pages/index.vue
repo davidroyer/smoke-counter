@@ -6,33 +6,38 @@
         <v-btn class="mx-2" fab dark color="indigo" @click="addToSmokeCount">
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
-        <pre>{{ datesDB }}</pre>
-        <hr />
-        <h3>NO nativeUI</h3>
+        <pre>{{ dates }}</pre>
       </div>
     </v-col>
   </v-row>
 </template>
 
 <script>
+/* eslint-disable no-console */
+
 export default {
   data: () => ({
     datesDB: {}
   }),
-  async mounted() {
-    // await this.$localForage.setItem('datesDB', { _id: 'test1' })
-    this.datesDB = (await this.$localForage.getItem('datesDB')) || {}
+
+  computed: {
+    dates() {
+      return this.$store.state.dates
+    }
+  },
+
+  async fetch({ store }) {
+    await store.dispatch('bindDates')
   },
 
   methods: {
+    getDate() {
+      const testDate = this.dates[0].date
+      console.log(testDate.toDate())
+    },
+
     addToSmokeCount() {
-      const now = new Date()
-      const dateString = now.toDateString()
-      if (!this.datesDB[dateString]) this.datesDB[dateString] = 1
-      else this.datesDB[dateString]++
-      this.$nextTick(async () => {
-        await this.$localForage.setItem('datesDB', this.datesDB)
-      })
+      // NOTE: Use Firebase action to make update
     }
   }
 }
