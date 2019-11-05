@@ -58,9 +58,9 @@ export default {
     display: 'standalone'
   },
 
-  meta: {
-    nativeUI: true
-  },
+  // meta: {
+  //   nativeUI: true
+  // },
 
   localforage: {
     name: 'smokeCount'
