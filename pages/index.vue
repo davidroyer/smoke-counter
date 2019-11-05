@@ -1,6 +1,8 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
+  <v-row justify="center">
+    <!-- <v-layout column justify-center align-center></v-layout>
+    <v-flex xs12 sm8 md6></v-flex> -->
+    <v-col>
       <div class="text-center">
         <h2 class="display-2 font-weight-medium">Add To Count</h2>
         <v-btn class="mx-2" fab dark color="indigo" @click="addToSmokeCount">
@@ -8,8 +10,8 @@
         </v-btn>
         <pre>{{ datesDB }}</pre>
       </div>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

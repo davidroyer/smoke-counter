@@ -48,14 +48,24 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
 
+  /*
+   ** Overwrite's generated manifest values
+   */
+  manifest: {
+    name: 'SmokeCount App',
+    short_name: 'SmokeCount',
+    lang: 'en',
+    display: 'standalone'
+  },
+
   localforage: {
     name: 'smokeCount'
   },
+
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
 
     theme: {
-      // dark: true,
       themes: {
         light: {
           primary: '#3f51b5',
