@@ -9,18 +9,23 @@ export const fireDB = fireApp.firestore()
 
 const smokecountRef = fireDB.collection('apps').doc('smokecount')
 const datesCollection = smokecountRef.collection('dates')
+// eslint-disable-next-line no-unused-vars
+const fakeDate = new Date('Nov 3 2019')
+const currentDate = new Date()
 
-// NOTE: ADDS MOCKDATA
-// const fakeDay = new Date('Nov 4 2019')
-// const dateDocRef = datesCollection.doc(fakeDay.toDateString())
-
-const dateDocRef = datesCollection.doc(new Date().toDateString())
+const dateDocRef = datesCollection.doc(currentDate.toDateString())
 
 const addToDayCount = async () => {
   const doc = await dateDocRef.get()
+  const dateId = doc.id
   let currentCount = doc.exists ? doc.data().count : 0
-  await dateDocRef.set({ count: ++currentCount, date: new Date() })
-  //   await dateDocRef.set({ count: ++currentCount, date: fakeDay }) // Note: Adds MOCKDATA
+
+  await dateDocRef.set({
+    count: ++currentCount,
+    date: currentDate,
+    dateString: dateId
+    // dateString: currentDate.toDateString()
+  })
 }
 
 addToDayCount().then(() => {

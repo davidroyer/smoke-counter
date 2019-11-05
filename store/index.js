@@ -18,6 +18,6 @@ export const mutations = {
 export const actions = {
   bindDates: firestoreAction((context) => {
     console.log('TCL: context', context)
-    return context.bindFirestoreRef('dates', datesCollection)
+    return context.bindFirestoreRef('dates', datesCollection.orderBy('date'))
   })
 }
