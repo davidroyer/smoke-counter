@@ -55,7 +55,10 @@ export default {
     name: 'SmokeCount App',
     short_name: 'SmokeCount',
     lang: 'en',
-    display: 'standalone',
+    display: 'standalone'
+  },
+
+  meta: {
     nativeUI: true
   },
 
