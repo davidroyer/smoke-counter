@@ -2,9 +2,8 @@
   <v-row justify="center">
     <v-col cols="12">
       <div class="text-center">
-        <h2 class="display-2 font-weight-medium">UPDATE</h2>
         <h2 class="display-2 font-weight-medium">Add To Count</h2>
-        <v-btn class="mx-2" fab dark color="indigo" @click="addToSmokeCount">
+        <v-btn class="mx-2" fab dark color="indigo" @click="addToDayCount">
           <v-icon dark>mdi-plus</v-icon>
         </v-btn>
       </div>
@@ -15,6 +14,16 @@
         <li v-for="(item, index) in dates" :key="index">
           <h3 v-text="item.dateString"></h3>
           <span v-text="item.count"></span>
+          <v-btn
+            class="mx-2"
+            dark
+            fab
+            x-small
+            color="indigo"
+            @click="addToSpecificDay(item)"
+          >
+            <v-icon dark>mdi-plus</v-icon>
+          </v-btn>
         </li>
       </ul>
     </v-col>
@@ -28,12 +37,14 @@
 
 <script>
 /* eslint-disable no-console */
+import { fireDB } from '@/plugins/firebase'
+
+const datesCollection = fireDB
+  .collection('apps')
+  .doc('smokecount')
+  .collection('dates')
 
 export default {
-  data: () => ({
-    datesDB: {}
-  }),
-
   computed: {
     dates() {
       return this.$store.state.dates
@@ -50,8 +61,25 @@ export default {
       console.log(testDate.toDate())
     },
 
-    addToSmokeCount() {
-      // NOTE: Use Firebase action to make update
+    async addToSpecificDay(day) {
+      const { id } = day
+      let { count } = day
+      await datesCollection.doc(id).update({ count: ++count })
+    },
+
+    async addToDayCount() {
+      const currentDate = new Date()
+      const dateDocRef = datesCollection.doc(currentDate.toDateString())
+      const doc = await dateDocRef.get()
+      const dateId = doc.id
+
+      let currentCount = doc.exists ? doc.data().count : 0
+
+      await dateDocRef.set({
+        count: ++currentCount,
+        date: currentDate,
+        dateString: dateId
+      })
     }
   }
 }
